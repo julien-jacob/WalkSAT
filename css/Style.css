@@ -1,0 +1,29 @@
+body {
+	background-color: #1C2126;
+	color: #888E94;
+}
+
+header 	{ text-align: center; }
+h2 		{ display: inline-block; margin: 0px;}
+a 		{ color : white;}
+
+.hideButton { float: right; }
+
+table.bigTable	{ border: 1px black solid; width: 100%; text-align: center;}
+
+.jumbotron {
+	font-weight: 300;
+	color: #cdbfe3;
+	text-shadow: 0 1px 0 rgba(0,0,0,.1);
+	background-color: #6f5499;
+}
+.jumbotron small {
+	color: #888E94;
+}
+
+footer {
+	border-top: 2px #888E94 solid;
+	margin-top: 50px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
