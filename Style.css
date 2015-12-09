@@ -1,0 +1,13 @@
+body {
+	background-color: #1C2126;
+	color: #888E94;
+	margin: 0px 20px 0px 20px;
+}
+
+header 	{ text-align: center; }
+h2 		{ display: inline-block; margin: 0px;}
+a 		{ color : white;}
+
+.hideButton { float: right; }
+
+table.bigTable	{ border: 1px black solid; width: 100%; text-align: center;}

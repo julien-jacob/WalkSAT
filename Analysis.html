@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<!-- ------------------------------------------------------------------------------ -->
+<!--                                   Projet Squaro                                -->
+<!-- ------------------------------------------------------------------------------ -->
+<!-- Logique propositionnelle et logique du premier ordre appliqué au jeu du Squaro -->
+<!--                JACOB Julien, HECKMANN Victor et ?????? Thomas                  -->
+<!-- ------------------------------------------------------------------------------ -->
+<!--  Analyse d'une exécution de squaro                                             -->
+<!-- ------------------------------------------------------------------------------ -->
+
+<html>
+  <head>
+    <title>Squaro - Projet INF 242</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="projet Suaro - Logique propositionnelle et SAT-Solver">
+    <meta name="author" content="JACOB Julien, Victor HECKMANN">
+    <LINK href="style.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="script/WalkSat.js"></script>
+    <script type="text/javascript" src="script/Squaro.js"></script>
+    <script type="text/javascript" src="script/Analysis.js"></script>
+  </head>
+
+  <body>
+  <header>
+    <h1>INF 242 - Projet Squaro</h1>
+    <span><b>JACOB Julien</b> et <b>HECKMANN Victor.</b></span>
+    <hr>
+  </header>
+
+  <h2 > Options de grille :</h2><button class="hideButton" onclick="afficherMasquer('optionsDeGrille');">Afficher / Masquer</button><hr>
+  <div id="optionsDeGrille">
+    <table>
+      <tr>
+        <td>Largeur de la grille : </td>
+        <td><input type="number" value="5" min="1" id="largeur" onchange="actualiserSquaro();" /></td>
+      </tr>
+      <tr>
+        <td>Hauteur de la grille : </td>
+        <td><input type="number" value="5" min="1" id="hauteur" onchange="actualiserSquaro();"/></td>
+      </tr>
+      <tr>
+        <td>Densité : </td>
+        <td><input type="number" value="50" min="0" max="100" id="densite" onchange="actualiserSquaro();"/></td>
+      </tr>
+    </table>
+    <input type="checkbox" name="genererGrilleSolvable" id="genererGrilleSolvable" checked/> 
+    <label for="genererGrilleSolvable">Générer une grille solvable.</label>
+    <br><br>
+    <button onclick="actualiserSquaro();">Nouvelle grille</button>
+    <br>
+  </div>
+
+
+  <br><hr><h2> Grille : </h2><button class="hideButton" onclick="afficherMasquer('grille');"/>Afficher / Masquer</button><hr>
+  <div id="grille">
+    <div id="grilleGenerer"></div>
+    <br>
+    <button onclick="GS.checkAllCheckboxs('grilleGenerer');">Tout cocher.</button>
+    <button onclick="GS.uncheckAllCheckboxs('grilleGenerer');">Tout décocher.</button>
+    <button onclick="GS.printGenerateSolution('grilleGenerer');">Solution de génération.</button><br>
+  </div>
+
+  <br><hr><h2> Information sur la grille : </h2><button class="hideButton" onclick="afficherMasquer('informationsSurLaGrille');">Afficher / Masquer</button><hr>
+  <div id="informationsSurLaGrille">
+    <table>
+      <tr><th>Informations générales :           </th> </tr>
+      <tr><td>Nombre de cases :                  </td><td><span id="nombreDeCases">0         </span></td></tr>
+      <tr><td>Nombre de  ronds :                 </td><td><span id="nombreDeRonds">0         </span></td></tr>
+      <tr><td>Nombres de ronds de la solution  : </td><td><span id="nombreDeRondeSolution">0 </span></td></tr>
+      <tr><td>Somme des valeurs :                </td><td><span id="sommeDesValeur">0 </span></td></tr>
+      <tr></tr>
+      <tr><th>Répartiton des valeurs :          </th> </tr>
+      <tr><td>Nombre de 0 :                     </td><td><span id="nombreDe0">0             </span></td></tr>
+      <tr><td>Nombre de  1 :                    </td><td><span id="nombreDe1">0             </span></td></tr>
+      <tr><td>Nombre de 2 :                     </td><td><span id="nombreDe2">0             </span></td></tr>
+      <tr><td>Nombre de 3 :                     </td><td><span id="nombreDe3">0             </span></td></tr>
+      <tr><td>Nombre de 4 :                     </td><td><span id="nombreDe4">0             </span></td></tr>
+    </table>
+  </div>
+
+    <br><hr><h2> Résolution : </h2><button class="hideButton" onclick="afficherMasquer('resolution');">Afficher / Masquer</button><hr>
+    <div id="resolution">
+        <p>
+            <input type="checkbox" name="prendreEnCompteRondsCoches" id="prendreEnCompteRondsCoches" 
+            onchange="actualiserTaxboxDimacs();" checked/>
+            <label for="prendreEnCompteRondsCoches" >Prendre en compte les ronds cochés ?</label>
+            <br>
+            <button id="actualiserDimacs" onclick="actualiserTaxboxDimacs();";>Actualiser</button>
+        </p>
+        <p id="pDimacs"></p>
+    </div>
+
+  <br><hr><h2> Solution : </h2><button class="hideButton" onclick="afficherMasquer('solution');">Afficher / Masquer</button><hr>
+  <div id="solution">
+      <p>
+         <input type="checkbox" name="WalkSatOption1" id="WalkSatOption1" checked/> 
+         <label for="WalkSatOption1"> Gérer les clauses valides.</label>
+         <br />
+         <input type="checkbox" name="WalkSatOption2" id="WalkSatOption2" checked/> 
+         <label for="WalkSatOption2"> Eliminer les clauses en double.</label>
+         <br />
+         <input type="checkbox" name="WalkSatOption3" id="WalkSatOption3" checked/> 
+         <label for="WalkSatOption3"> Repérer les contradictions de clauses unitaires. </label>
+         <br />
+         <input type="checkbox" name="WalkSatOption4" id="WalkSatOption4" checked/> 
+         <label for="WalkSatOption4"> Sauvegarde des assignations déjà testées.</label>
+     </p>
+     <p>Nombre d'itérations maximum : <input type="number" value="25000" min="1" id="nombreIterationsMax" /></p>
+     <p>Seuil P : <input type="number" value="50" min="0" max="100" id="WalkSatSeuil" /></p>
+      <button onclick="lancerWalkSat();">Resoudre</button>
+      <br/><br/>
+      <div id="grilleSolutionSAT"></div>
+      <div id="logDuWalkSat"></div><br/>
+      <br><br>
+  </div>
+
+  <script tpye="text/javascript">
+    actualiserSquaro();
+  </script>
+	
+
+  </body>
+
+</html>

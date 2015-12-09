@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<!-- ------------------------------------------------------------------------------ -->
+<!--                                   Projet Squaro                                -->
+<!-- ------------------------------------------------------------------------------ -->
+<!-- Logique propositionnelle et logique du premier ordre appliqué au jeu du Squaro -->
+<!--                JACOB Julien, HECKMANN Victor                  -->
+<!-- ------------------------------------------------------------------------------ -->
+<!--  Analyse, comparaisons et statistiques sur une série d'exécutions de Squaro    -->
+<!-- ------------------------------------------------------------------------------ -->
+
+<html>
+	<head>
+		<title>Squaro - Projet INF 242</title>
+		<meta 	charset="utf-8" />
+		<LINK 	href="style.css" rel="stylesheet" type="text/css">
+		<meta 	name="description" 	content="projet Suaro - Logique propositionnelle et SAT-Solver">
+		<meta 	name="author" 			content="JACOB Julien, Victor HECKMANN">
+		<script type="text/javascript" src="script/WalkSat.js"></script>
+		<script type="text/javascript" src="script/Squaro.js"></script>
+		<script type="text/javascript" src="script/MetaAnalysis.js"></script>
+	</head>
+
+<body>
+	<header>
+		<h1>INF 242 - Projet Squaro</h1>
+		<span><b>JACOB Julien</b> et <b>HECKMANN Victor.</b></span>
+		<hr>
+	</header>
+
+	<h2 > Options des grilles :</h2>
+	<button class="hideButton" onclick="afficherMasquer('optionsDeGrille');">Afficher / Masquer</button>
+	<hr>
+	<div id="optionsDeGrille">
+		<table>
+			<tr>
+				<td>Nombre de tests : </td>
+				<td><input type="number" value="5" min="1" id="NombreDeTest" /></td>
+			</tr>
+			<tr>
+				<td>Largeur des grilles : </td>
+				<td><input type="number" value="5" min="1" id="largeur" /></td>
+			</tr>
+			<tr>
+				<td>Hauteur des grilles : </td>
+				<td><input type="number" value="5" min="1" id="hauteur"/></td>
+			</tr>
+			<tr>
+				<td>Densité : </td>
+				<td><input type="number" value="50" min="0" max="100" id="densite"/></td>
+			</tr>
+		</table>
+		<input type="checkbox" name="genererGrilleSolvable" id="genererGrilleSolvable" checked/> 
+		<label for="genererGrilleSolvable">Générer des grilles solvables.</label>
+	</div>
+	<br>
+	
+	<hr><h2 >Paramètres du WalkSat :</h2>
+	<button class="hideButton" onclick="afficherMasquer('parametreWalkSat');">Afficher / Masquer</button>
+	<hr>
+	<div id="parametreWalkSat">
+	  <p>
+		   <input type="checkbox" name="WalkSatOption1" id="WalkSatOption1" checked/> 
+		   <label for="WalkSatOption1"> Gérer les clauses valides.</label>
+		   <br />
+		   <input type="checkbox" name="WalkSatOption2" id="WalkSatOption2" checked/> 
+		   <label for="WalkSatOption2"> Eliminer les clauses en double.</label>
+		   <br />
+		   <input type="checkbox" name="WalkSatOption3" id="WalkSatOption3" checked/> 
+		   <label for="WalkSatOption3"> Repérer les contradictions de clauses unitaires. </label>
+		   <br />
+		   <input type="checkbox" name="WalkSatOption4" id="WalkSatOption4" checked/> 
+		   <label for="WalkSatOption4"> Sauvegarde des assignations déjà testées.</label>
+	   </p>
+	   <p>Nombre d'itérations maximum : <input type="number" value="25000" min="1" id="nombreIterationsMax" /></p>
+	   <p>Seuil P : <input type="number" value="50" min="0" max="100" id="WalkSatSeuil" /></p>
+	   <button onclick="lancerAnalyse();">Lancer l'analyse</button>
+	</div>
+	<br>
+
+
+	<hr><h2 > Résultats détaillés de l'analyse :</h2>
+	<button class="hideButton" onclick="afficherMasquer('resultatsDetailles');">Afficher / Masquer</button>
+	<hr>
+	<div id="resultatsDetailles"></div>
+	<br>
+
+	<hr><h2 > Résultats de l'analyse :</h2>
+	<button class="hideButton" onclick="afficherMasquer('resultats');">Afficher / Masquer</button>
+	<hr>
+	<div id="resultats"></div>
+	<br>
+</body>
+
+</html>
