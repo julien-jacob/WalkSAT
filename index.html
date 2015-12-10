@@ -28,10 +28,61 @@
 	</head>
 	<body>
 
+		<nav class="navbar navbar-default navbar-static-top navbar-inverse">
+			<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">Walk<span class="text-primary">SAT</span></a>
+				</div>
+
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+					<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Solver <span class="sr-only">(current)</span></a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Outils de tests <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="analysis.html">Générateur de FNC</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="meta-analysis.html">Tests de performances</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="documentation/walksat-et-sat-solver">WalkSAT et SAT-Solver</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="#">Squaro et problème SAT</a></li>
+						</ul>
+					</li>
+					</ul>
+
+					<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Plus outils<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">HTACCESS-Gen</a></li>
+							<li><a href="#">PASSWORD-Gen</a></li>
+						</ul>
+					</li>
+					<li><a href="http://cerf-de-pixel.fr/">Visiter Cerf-de-pixel.fr</a></li>
+					</ul>
+
+				</div><!-- /.navbar-collapse -->
+			</div><!-- /.container-fluid -->
+		</nav>
+
 		<div class="jumbotron">
 			<div class="container">
 				<div class="page-header">
-					<h1>WalkSAT<small>SAT-Solver codé en JavaScript</small></h1>
+					<h1>WalkSAT <small> SAT-Solver codé en JavaScript</small></h1>
 				</div>
 				<p>Outil destiné à la résolution de <a href="http://fr.wikipedia.org/wiki/Problème_SAT"target="_blank">problèmes SAT</a>, c'est à dire de problèmes de décision de <strong>logique propositionnelle</strong> présentés sous la forme d'un <strong>ensemble de clauses</strong> au format <strong>DIMACS</strong>. </p>
 			</div>
@@ -108,50 +159,50 @@
 
 		fncExemple += " p cnf 9 42\n";
 		fncExemple += "-1 -2 -4 -5\n";
-		fncExemple += "-1 -2 -4  5\n";
-		fncExemple += "-1 -2  4 -5\n";
-		fncExemple += "-1  2 -4 -5\n";
-		fncExemple += "-1  2  4  5\n";
+		fncExemple += "-1 -2 -4	5\n";
+		fncExemple += "-1 -2	4 -5\n";
+		fncExemple += "-1	2 -4 -5\n";
+		fncExemple += "-1	2	4	5\n";
 		fncExemple += " 1 -2 -4 -5\n";
-		fncExemple += " 1 -2  4  5\n";
-		fncExemple += " 1  2 -4  5\n";
-		fncExemple += " 1  2  4 -5\n";
-		fncExemple += " 1  2  4  5\n\n";
+		fncExemple += " 1 -2	4	5\n";
+		fncExemple += " 1	2 -4	5\n";
+		fncExemple += " 1	2	4 -5\n";
+		fncExemple += " 1	2	4	5\n\n";
 
 		fncExemple += "-2 -3 -5 -6\n";
-		fncExemple += "-2 -3 -5  6\n";
-		fncExemple += "-2 -3  5 -6\n";
-		fncExemple += "-2  3 -5 -6\n";
-		fncExemple += "-2  3  5  6\n";
+		fncExemple += "-2 -3 -5	6\n";
+		fncExemple += "-2 -3	5 -6\n";
+		fncExemple += "-2	3 -5 -6\n";
+		fncExemple += "-2	3	5	6\n";
 		fncExemple += " 2 -3 -5 -6\n";
-		fncExemple += " 2 -3  5  6\n";
-		fncExemple += " 2  3 -5  6\n";
-		fncExemple += " 2  3  5 -6\n";
-		fncExemple += " 2  3  5  6\n\n";
+		fncExemple += " 2 -3	5	6\n";
+		fncExemple += " 2	3 -5	6\n";
+		fncExemple += " 2	3	5 -6\n";
+		fncExemple += " 2	3	5	6\n\n";
 
 		fncExemple += "-4 -5 -7 -8\n";
-		fncExemple += "-4 -5 -7  8\n";
-		fncExemple += "-4 -5  7 -8\n";
-		fncExemple += "-4  5 -7 -8\n";
-		fncExemple += "-4  5  7  8\n";
+		fncExemple += "-4 -5 -7	8\n";
+		fncExemple += "-4 -5	7 -8\n";
+		fncExemple += "-4	5 -7 -8\n";
+		fncExemple += "-4	5	7	8\n";
 		fncExemple += " 4 -5 -7 -8\n";
-		fncExemple += " 4 -5  7  8\n";
-		fncExemple += " 4  5 -7  8\n";
-		fncExemple += " 4  5  7 -8\n";
-		fncExemple += " 4  5  7  8\n\n";
+		fncExemple += " 4 -5	7	8\n";
+		fncExemple += " 4	5 -7	8\n";
+		fncExemple += " 4	5	7 -8\n";
+		fncExemple += " 4	5	7	8\n\n";
 
 		fncExemple += "-5 -6 -8 -9\n";
-		fncExemple += "-5 -6 -8  9\n";
-		fncExemple += "-5 -6  8 -9\n";
-		fncExemple += "-5 -6  8  9\n";
-		fncExemple += "-5  6 -8 -9\n";
-		fncExemple += "-5  6 -8  9\n";
-		fncExemple += "-5  6  8 -9\n";
+		fncExemple += "-5 -6 -8	9\n";
+		fncExemple += "-5 -6	8 -9\n";
+		fncExemple += "-5 -6	8	9\n";
+		fncExemple += "-5	6 -8 -9\n";
+		fncExemple += "-5	6 -8	9\n";
+		fncExemple += "-5	6	8 -9\n";
 		fncExemple += " 5 -6 -8 -9\n";
-		fncExemple += " 5 -6 -8  9\n";
-		fncExemple += " 5 -6  8 -9\n";
-		fncExemple += " 5  6 -8 -9\n";
-		fncExemple += " 5  6  8  9";
+		fncExemple += " 5 -6 -8	9\n";
+		fncExemple += " 5 -6	8 -9\n";
+		fncExemple += " 5	6 -8 -9\n";
+		fncExemple += " 5	6	8	9";
 
 		document.getElementById("textareaDimacs").value = fncExemple;
 
