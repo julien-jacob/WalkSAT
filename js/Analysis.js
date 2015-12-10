@@ -65,8 +65,8 @@ function lancerWalkSat() {
 }
 
 function actualiserTaxboxDimacs() {
-  GS.useArrayImposeCheck = document.getElementById('prendreEnCompteRondsCoches').checked;
-  document.getElementById("pDimacs").innerHTML = "<textarea rows='10' cols='50'>" + GS.dimacs() + "</textarea>";
+  GS.useArrayImposeCheck = false; //document.getElementById('prendreEnCompteRondsCoches').checked;
+  document.getElementById("pDimacs").innerHTML = "<textarea rows='10' class='form-control'>" + GS.dimacs() + "</textarea>";
 }
 
 
