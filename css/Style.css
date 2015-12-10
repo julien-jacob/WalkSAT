@@ -1,8 +1,7 @@
-body {
+.bg-black {
 	background-color: #1C2126;
 	color: #888E94;
 }
-
 
 .hideButton { float: right; }
 
@@ -26,3 +25,4 @@ footer {
 	padding-top: 20px;
 	padding-bottom: 20px;
 }
+
