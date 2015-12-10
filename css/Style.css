@@ -3,19 +3,18 @@ body {
 	color: #888E94;
 }
 
-header 	{ text-align: center; }
-h2 		{ display: inline-block; margin: 0px;}
-a 		{ color : white;}
 
 .hideButton { float: right; }
 
 table.bigTable	{ border: 1px black solid; width: 100%; text-align: center;}
 
-.jumbotron {
+.jumbotron,
+.jumbotron a {
 	font-weight: 300;
 	color: #cdbfe3;
 	text-shadow: 0 1px 0 rgba(0,0,0,.1);
 	background-color: #6f5499;
+	margin-top: -30px;
 }
 .jumbotron small {
 	color: #888E94;
