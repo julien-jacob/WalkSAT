@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <!-- ------------------------------------------------------------------------------- -->
-<!--                                  Projet WalkSAT                                 -->
+<!--Projet WalkSAT -->
 <!-- ------------------------------------------------------------------------------- -->
-<!--                        JACOB Julien, HECKMANN Victor                            -->
+<!--JACOB Julien, HECKMANN Victor-->
 <!-- ------------------------------------------------------------------------------- -->
 
 <html lang="en">
@@ -29,173 +29,167 @@
 	<body>
 
 		<div class="jumbotron">
-		  	<div class="container">
-		  		<div class="page-header">
-						<h1>WalkSAT  <small>SAT-Solver codé en JavaScript</small></h1>
-					</div>
-					<p>Outil destiné à la résolution de <a href="http://fr.wikipedia.org/wiki/Problème_SAT"  target="_blank">problèmes SAT</a>, c'est à dire de problèmes de décision de <strong>logique propositionnelle</strong> présentés sous la forme d'un <strong>ensemble de clauses</strong> au format <strong>DIMACS</strong>. </p>
-
-		  </div>
+			<div class="container">
+				<div class="page-header">
+					<h1>WalkSAT<small>SAT-Solver codé en JavaScript</small></h1>
+				</div>
+				<p>Outil destiné à la résolution de <a href="http://fr.wikipedia.org/wiki/Problème_SAT"target="_blank">problèmes SAT</a>, c'est à dire de problèmes de décision de <strong>logique propositionnelle</strong> présentés sous la forme d'un <strong>ensemble de clauses</strong> au format <strong>DIMACS</strong>. </p>
+			</div>
 		</div>
 
 		<div class="container">
 			<div class="col-md-6">
 
-						<h2>Paramètres du WalkSAT :</h2><hr>
+				<h2>Paramètres du WalkSAT :</h2><hr>
 
-							<textarea rows="10" id="textareaDimacs" class="form-control" ></textarea>
-							<br>
+				<textarea rows="10" id="textareaDimacs" class="form-control" ></textarea>
+				<br>
 
-							<div class="collapse" id="options">
-							<div class="form-group">
+				<div class="collapse" id="options">
+					<div class="form-group">
 
-								<div class="checkbox">
-							    <label>
-							      <input type="checkbox" name="WalkSatOption1" id="WalkSatOption1" checked/> Gérer les clauses valides
-							    </label>
-							    <br />
-							    <label>
-							      <input type="checkbox" name="WalkSatOption2" id="WalkSatOption2" checked/> Eliminer les clauses en double
-							    </label>
-							    <br />
-							    <label>
-							      <input type="checkbox" name="WalkSatOption3" id="WalkSatOption3" checked/> Repérer les contradictions de clauses unitaires
-							    </label>
-							    <br />
-							    <label>
-							      <input type="checkbox" name="WalkSatOption4" id="WalkSatOption4" checked/> Sauvegarde des assignations déjà testées.
-							    </label>
-							    <br />
-							  </div>
-						  </div>
-
-						  <div class="form-group">
-						    <label for="nombreIterationsMax">Nombre d'itérations maximum : </label>
-						    <input type="number" value="25000" min="1" id="nombreIterationsMax" class="form-control" />
-						  </div>
-
-						  <div class="form-group">
-						    <label for="WalkSatSeuil">Seuil pour le générateur de booléen aléatoir : </label>
-						    <input type="number" value="50" min="1" max="100" id="WalkSatSeuil" class="form-control" />
-						  </div>
-						  <br/>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="WalkSatOption1" id="WalkSatOption1" checked/> Gérer les clauses valides
+							</label>
+							<br />
+							<label>
+								<input type="checkbox" name="WalkSatOption2" id="WalkSatOption2" checked/> Eliminer les clauses en double
+							</label>
+							<br />
+							<label>
+								<input type="checkbox" name="WalkSatOption3" id="WalkSatOption3" checked/> Repérer les contradictions de clauses unitaires
+							</label>
+							<br />
+							<label>
+								<input type="checkbox" name="WalkSatOption4" id="WalkSatOption4" checked/> Sauvegarde des assignations déjà testées.
+							</label>
+							<br />
 						</div>
-
-
-						<p class="text-right">
-							<a class="btn btn-success" onclick="lancerResolution();"> Lancer la résolution</a>
-
-							<a class="btn btn-primary" data-toggle="collapse" href="#options" aria-expanded="false" aria-controls="options"> Options</a>
-						</p>
-
-					</div> <!-- fin des parametres -->
-
-
-					<div class="col-md-6">
-						<h2>Résolution : </h2><hr>
-						<div id="divSolution"></div>
 					</div>
 
+					<div class="form-group">
+						<label for="nombreIterationsMax">Nombre d'itérations maximum : </label>
+						<input type="number" value="25000" min="1" id="nombreIterationsMax" class="form-control" />
+					</div>
+
+					<div class="form-group">
+						<label for="WalkSatSeuil">Seuil pour le générateur de booléen aléatoir : </label>
+						<input type="number" value="50" min="1" max="100" id="WalkSatSeuil" class="form-control" />
+					</div>
+					<br/>
 				</div>
 
-				<div class="container">
-					<footer>
-						<p class="text-center">Réaliser sur la base d'un projet l'UE INF242</p>
-					</footer>
-				</div>
+				<p class="text-right">
+					<a class="btn btn-success" onclick="lancerResolution();"> Lancer la résolution</a>
+
+					<a class="btn btn-primary" data-toggle="collapse" href="#options" aria-expanded="false" aria-controls="options"> Options</a>
+				</p>
+
+			</div> <!-- fin des parametres -->
+
+
+			<div class="col-md-6">
+				<h2>Résolution : </h2><hr>
+				<div id="divSolution"></div>
+			</div>
+
+		</div> <!-- .container END -->
+
+		<div class="container">
+			<footer>
+				<p class="text-center">Réaliser sur la base d'un projet l'UE INF242</p>
+			</footer>
+		</div>
 				
-
-			
 
 		<script type="text/javascript">
+		var fncExemple = "";
 
-			var fncExemple = "";
+		fncExemple += " p cnf 9 42\n";
+		fncExemple += "-1 -2 -4 -5\n";
+		fncExemple += "-1 -2 -4  5\n";
+		fncExemple += "-1 -2  4 -5\n";
+		fncExemple += "-1  2 -4 -5\n";
+		fncExemple += "-1  2  4  5\n";
+		fncExemple += " 1 -2 -4 -5\n";
+		fncExemple += " 1 -2  4  5\n";
+		fncExemple += " 1  2 -4  5\n";
+		fncExemple += " 1  2  4 -5\n";
+		fncExemple += " 1  2  4  5\n\n";
 
-			fncExemple += " p cnf 9 42\n";
-			fncExemple += "-1 -2 -4 -5\n";
-			fncExemple += "-1 -2 -4  5\n";
-			fncExemple += "-1 -2  4 -5\n";
-			fncExemple += "-1  2 -4 -5\n";
-			fncExemple += "-1  2  4  5\n";
-			fncExemple += " 1 -2 -4 -5\n";
-			fncExemple += " 1 -2  4  5\n";
-			fncExemple += " 1  2 -4  5\n";
-			fncExemple += " 1  2  4 -5\n";
-			fncExemple += " 1  2  4  5\n\n";
+		fncExemple += "-2 -3 -5 -6\n";
+		fncExemple += "-2 -3 -5  6\n";
+		fncExemple += "-2 -3  5 -6\n";
+		fncExemple += "-2  3 -5 -6\n";
+		fncExemple += "-2  3  5  6\n";
+		fncExemple += " 2 -3 -5 -6\n";
+		fncExemple += " 2 -3  5  6\n";
+		fncExemple += " 2  3 -5  6\n";
+		fncExemple += " 2  3  5 -6\n";
+		fncExemple += " 2  3  5  6\n\n";
 
-			fncExemple += "-2 -3 -5 -6\n";
-			fncExemple += "-2 -3 -5  6\n";
-			fncExemple += "-2 -3  5 -6\n";
-			fncExemple += "-2  3 -5 -6\n";
-			fncExemple += "-2  3  5  6\n";
-			fncExemple += " 2 -3 -5 -6\n";
-			fncExemple += " 2 -3  5  6\n";
-			fncExemple += " 2  3 -5  6\n";
-			fncExemple += " 2  3  5 -6\n";
-			fncExemple += " 2  3  5  6\n\n";
+		fncExemple += "-4 -5 -7 -8\n";
+		fncExemple += "-4 -5 -7  8\n";
+		fncExemple += "-4 -5  7 -8\n";
+		fncExemple += "-4  5 -7 -8\n";
+		fncExemple += "-4  5  7  8\n";
+		fncExemple += " 4 -5 -7 -8\n";
+		fncExemple += " 4 -5  7  8\n";
+		fncExemple += " 4  5 -7  8\n";
+		fncExemple += " 4  5  7 -8\n";
+		fncExemple += " 4  5  7  8\n\n";
 
-			fncExemple += "-4 -5 -7 -8\n";
-			fncExemple += "-4 -5 -7  8\n";
-			fncExemple += "-4 -5  7 -8\n";
-			fncExemple += "-4  5 -7 -8\n";
-			fncExemple += "-4  5  7  8\n";
-			fncExemple += " 4 -5 -7 -8\n";
-			fncExemple += " 4 -5  7  8\n";
-			fncExemple += " 4  5 -7  8\n";
-			fncExemple += " 4  5  7 -8\n";
-			fncExemple += " 4  5  7  8\n\n";
+		fncExemple += "-5 -6 -8 -9\n";
+		fncExemple += "-5 -6 -8  9\n";
+		fncExemple += "-5 -6  8 -9\n";
+		fncExemple += "-5 -6  8  9\n";
+		fncExemple += "-5  6 -8 -9\n";
+		fncExemple += "-5  6 -8  9\n";
+		fncExemple += "-5  6  8 -9\n";
+		fncExemple += " 5 -6 -8 -9\n";
+		fncExemple += " 5 -6 -8  9\n";
+		fncExemple += " 5 -6  8 -9\n";
+		fncExemple += " 5  6 -8 -9\n";
+		fncExemple += " 5  6  8  9";
 
-			fncExemple += "-5 -6 -8 -9\n";
-			fncExemple += "-5 -6 -8  9\n";
-			fncExemple += "-5 -6  8 -9\n";
-			fncExemple += "-5 -6  8  9\n";
-			fncExemple += "-5  6 -8 -9\n";
-			fncExemple += "-5  6 -8  9\n";
-			fncExemple += "-5  6  8 -9\n";
-			fncExemple += " 5 -6 -8 -9\n";
-			fncExemple += " 5 -6 -8  9\n";
-			fncExemple += " 5 -6  8 -9\n";
-			fncExemple += " 5  6 -8 -9\n";
-			fncExemple += " 5  6  8  9";
+		document.getElementById("textareaDimacs").value = fncExemple;
 
-			document.getElementById("textareaDimacs").value = fncExemple;
+		function lancerResolution () {
 
-			function lancerResolution () {
+			WalkSatOptions["clauseUnitaire"]= document.getElementById("WalkSatOption1").checked;
+			WalkSatOptions["eliminationClausesDoubles"] = document.getElementById("WalkSatOption2").checked;
+			WalkSatOptions["ContradictionClausesUnitaires"] = document.getElementById("WalkSatOption3").checked;
+			WalkSatOptions["SauvegardeAssignationsTestees"] = document.getElementById("WalkSatOption4").checked;
+			WalkSat_nbIterartionsMax = parseInt(document.getElementById("nombreIterationsMax").value) || 25000; 
+			walksat_seuil = parseInt(document.getElementById("WalkSatSeuil").value) || 50;
+			
+			var dimacs = document.getElementById("textareaDimacs").value;
 
-				WalkSatOptions["clauseUnitaire"]                = document.getElementById("WalkSatOption1").checked;
-				WalkSatOptions["eliminationClausesDoubles"]     = document.getElementById("WalkSatOption2").checked;
-				WalkSatOptions["ContradictionClausesUnitaires"] = document.getElementById("WalkSatOption3").checked;
-				WalkSatOptions["SauvegardeAssignationsTestees"] = document.getElementById("WalkSatOption4").checked;
-				WalkSat_nbIterartionsMax = parseInt(document.getElementById("nombreIterationsMax").value) || 25000; 
-				walksat_seuil = parseInt(document.getElementById("WalkSatSeuil").value) || 50;
-				
-				var dimacs = document.getElementById("textareaDimacs").value;
+			var solution = WalkSat(dimacs);
 
-				var solution = WalkSat(dimacs);
+			var log = "<h3>Informations</h3>";
+			log += "<dl class='dl-horizontal'>";
+			log += "	<dt>Nombre d'itérations : </dt><dd>" + WalkSatLOG["iterationWalkSat"] +"</dd>";
+			log += "	<dt>Temps d'exécution : 	</dt><dd>" + WalkSatLOG["tempsExecution"] +" Ms</dd>";
+			log += "</dl>";
 
-				var log = "<h3>Informations</h3>";
-				log += "<dl class='dl-horizontal'>";
-				log += "	<dt>Nombre d'itérations : </dt><dd>" + WalkSatLOG["iterationWalkSat"] +"</dd>";
-				log += "	<dt>Temps d'exécution : 	</dt><dd>" + WalkSatLOG["tempsExecution"]   +" Ms</dd>";
-				log += "</dl>";
-
-				if (WalkSatLOG["messageErreur"]) {
-					log += '<div class="alert alert-danger" role="alert"><strong>Message d\'erreur : </strong>'+ WalkSatLOG["messageErreur"] +'</div>';
-				}
-
-				document.getElementById("divSolution").innerHTML =  log;
-
-				var solutionNum = "";
-				if (WalkSatLOG["messageErreur"] == "") {
-					for (var i = 1; i <= solution.length; i++) {
-						if (!solution[i]) {solutionNum += " -";}
-						solutionNum += i + " ";
-					}
-				}
-
-				document.getElementById("divSolution").innerHTML +=  "<h3>Solution</h3><p class='text-primary'>" + solutionNum +"</p>";
+			if (WalkSatLOG["messageErreur"]) {
+				log += '<div class="alert alert-danger" role="alert"><strong>Message d\'erreur : </strong>'+ WalkSatLOG["messageErreur"] +'</div>';
 			}
 
+			document.getElementById("divSolution").innerHTML =log;
+
+			var solutionNum = "";
+			if (WalkSatLOG["messageErreur"] == "") {
+				for (var i = 1; i <= solution.length; i++) {
+					if (!solution[i]) {solutionNum += " -";}
+					solutionNum += i + " ";
+				}
+			}
+
+			document.getElementById("divSolution").innerHTML +="<h3>Solution</h3><p class='text-primary'>" + solutionNum +"</p>";
+		}
 		</script>
 
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
