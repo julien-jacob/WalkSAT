@@ -1,95 +1,201 @@
 <!DOCTYPE html>
+<!-- ------------------------------------------------------------------------------- -->
+<!--Projet WalkSAT -->
+<!-- ------------------------------------------------------------------------------- -->
+<!--JACOB Julien, HECKMANN Victor-->
+<!-- ------------------------------------------------------------------------------- -->
 
-<!-- ------------------------------------------------------------------------------ -->
-<!--                                   Projet Squaro                                -->
-<!-- ------------------------------------------------------------------------------ -->
-<!-- Logique propositionnelle et logique du premier ordre appliqué au jeu du Squaro -->
-<!--                JACOB Julien, HECKMANN Victor                  -->
-<!-- ------------------------------------------------------------------------------ -->
-<!--  Analyse, comparaisons et statistiques sur une série d'exécutions de Squaro    -->
-<!-- ------------------------------------------------------------------------------ -->
-
-<html>
+<html lang="fr">
 	<head>
-		<title>Squaro - Projet INF 242</title>
-		<meta 	charset="utf-8" />
-		<LINK 	href="style.css" rel="stylesheet" type="text/css">
-		<meta 	name="description" 	content="projet Suaro - Logique propositionnelle et SAT-Solver">
-		<meta 	name="author" 			content="JACOB Julien, Victor HECKMANN">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<title>Walker-SAT | SAT Solveur en ligne codé en JS</title>
+
 		<script type="text/javascript" src="js/WalkSat.js"></script>
 		<script type="text/javascript" src="js/Squaro.js"></script>
 		<script type="text/javascript" src="js/MetaAnalysis.js"></script>
+
+		<!-- Bootstrap -->
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+		<link href="css/style.css" rel="stylesheet">
 	</head>
+	<body class="bg-black">
 
-<body>
-	<header>
-		<h1>INF 242 - Projet Squaro</h1>
-		<span><b>JACOB Julien</b> et <b>HECKMANN Victor.</b></span>
-		<hr>
-	</header>
+		<nav class="navbar navbar-default navbar-static-top navbar-inverse">
+			<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">Walk<span class="text-primary">SAT</span></a>
+				</div>
 
-	<h2 > Options des grilles :</h2>
-	<button class="hideButton" onclick="afficherMasquer('optionsDeGrille');">Afficher / Masquer</button>
-	<hr>
-	<div id="optionsDeGrille">
-		<table>
-			<tr>
-				<td>Nombre de tests : </td>
-				<td><input type="number" value="5" min="1" id="NombreDeTest" /></td>
-			</tr>
-			<tr>
-				<td>Largeur des grilles : </td>
-				<td><input type="number" value="5" min="1" id="largeur" /></td>
-			</tr>
-			<tr>
-				<td>Hauteur des grilles : </td>
-				<td><input type="number" value="5" min="1" id="hauteur"/></td>
-			</tr>
-			<tr>
-				<td>Densité : </td>
-				<td><input type="number" value="50" min="0" max="100" id="densite"/></td>
-			</tr>
-		</table>
-		<input type="checkbox" name="genererGrilleSolvable" id="genererGrilleSolvable" checked/> 
-		<label for="genererGrilleSolvable">Générer des grilles solvables.</label>
-	</div>
-	<br>
-	
-	<hr><h2 >Paramètres du WalkSat :</h2>
-	<button class="hideButton" onclick="afficherMasquer('parametreWalkSat');">Afficher / Masquer</button>
-	<hr>
-	<div id="parametreWalkSat">
-	  <p>
-		   <input type="checkbox" name="WalkSatOption1" id="WalkSatOption1" checked/> 
-		   <label for="WalkSatOption1"> Gérer les clauses valides.</label>
-		   <br />
-		   <input type="checkbox" name="WalkSatOption2" id="WalkSatOption2" checked/> 
-		   <label for="WalkSatOption2"> Eliminer les clauses en double.</label>
-		   <br />
-		   <input type="checkbox" name="WalkSatOption3" id="WalkSatOption3" checked/> 
-		   <label for="WalkSatOption3"> Repérer les contradictions de clauses unitaires. </label>
-		   <br />
-		   <input type="checkbox" name="WalkSatOption4" id="WalkSatOption4" checked/> 
-		   <label for="WalkSatOption4"> Sauvegarde des assignations déjà testées.</label>
-	   </p>
-	   <p>Nombre d'itérations maximum : <input type="number" value="25000" min="1" id="nombreIterationsMax" /></p>
-	   <p>Seuil P : <input type="number" value="50" min="0" max="100" id="WalkSatSeuil" /></p>
-	   <button onclick="lancerAnalyse();">Lancer l'analyse</button>
-	</div>
-	<br>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
+					<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Solver <span class="sr-only">(current)</span></a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Outils de tests <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="analysis.html">Générateur de FNC</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="meta-analysis.html">Tests de performances</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="documentation/walksat-et-sat-solver.html">WalkSAT et SAT-Solver</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="documentation/squaro-et-probleme-sat.html">Squaro et problème SAT</a></li>
+						</ul>
+					</li>
+					</ul>
 
-	<hr><h2 > Résultats détaillés de l'analyse :</h2>
-	<button class="hideButton" onclick="afficherMasquer('resultatsDetailles');">Afficher / Masquer</button>
-	<hr>
-	<div id="resultatsDetailles"></div>
-	<br>
+					<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Plus outils<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">HTACCESS-Gen</a></li>
+							<li><a href="#">PASSWORD-Gen</a></li>
+						</ul>
+					</li>
+					<li><a href="http://cerf-de-pixel.fr/">Visiter Cerf-de-pixel.fr</a></li>
+					</ul>
 
-	<hr><h2 > Résultats de l'analyse :</h2>
-	<button class="hideButton" onclick="afficherMasquer('resultats');">Afficher / Masquer</button>
-	<hr>
-	<div id="resultats"></div>
-	<br>
-</body>
+				</div><!-- /.navbar-collapse -->
+			</div><!-- /.container-fluid -->
+		</nav>
 
+		<div class="jumbotron">
+			<div class="container">
+				<div class="page-header">
+					<h1>WalkSAT <small> Test de performances</small></h1>
+				</div>
+				<p>Executez une série de tests sur un ensemble de FNC générée au format DIMACS à partir des régles imposées par le jeu du Squaro sur une grille générée aléatoirement.</p>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="row bottom-space">
+				<div class="col-xs-12">
+					<h1>Paramètres du test</h1>
+					<hr>
+				</div>
+
+				<div class="col-md-4">
+					<h3> Options des grilles :</h3>
+					<div id="optionsDeGrille">
+						<table>
+							<tr>
+								<td>Nombre de tests : </td>
+								<td><input type="number" value="5" min="1" id="NombreDeTest" /></td>
+							</tr>
+							<tr>
+								<td>Largeur des grilles : </td>
+								<td><input type="number" value="5" min="1" id="largeur" /></td>
+							</tr>
+							<tr>
+								<td>Hauteur des grilles : </td>
+								<td><input type="number" value="5" min="1" id="hauteur"/></td>
+							</tr>
+							<tr>
+								<td>Densité : </td>
+								<td><input type="number" value="50" min="0" max="100" id="densite"/></td>
+							</tr>
+						</table>
+						<input type="checkbox" name="genererGrilleSolvable" id="genererGrilleSolvable" checked/> 
+						<label for="genererGrilleSolvable">Générer des grilles solvables.</label>
+					</div>
+				</div>
+
+				<div class="col-md-8 container">
+					<h3 >Paramètres du WalkSat :</h3>
+
+					<div class="row" id="parametreWalkSat">
+
+						<div class="col-md-6">
+							
+								<label>
+									<input type="checkbox" name="WalkSatOption1" id="WalkSatOption1" checked/> Gérer les clauses valides
+								</label>
+								<br />
+								<label>
+									<input type="checkbox" name="WalkSatOption2" id="WalkSatOption2" checked/> Eliminer les clauses en double
+								</label>
+								<br />
+								<label>
+									<input type="checkbox" name="WalkSatOption3" id="WalkSatOption3" checked/> Repérer les contradictions de clauses unitaires
+								</label>
+								<br />
+								<label>
+									<input type="checkbox" name="WalkSatOption4" id="WalkSatOption4" checked/> Sauvegarde des assignations déjà testées.
+								</label>
+								<br />
+							
+						</div>
+
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="nombreIterationsMax">Nombre d'itérations maximum : </label>
+								<input type="number" value="25000" min="1" id="nombreIterationsMax" class="form-control" />
+								<br>
+								<label for="WalkSatSeuil">Seuil pour le générateur de booléen aléatoir : </label>
+								<input type="number" value="50" min="1" max="100" id="WalkSatSeuil" class="form-control" />
+							</div>
+						</div>
+						
+					</div>
+
+				</div>
+
+				<div class="col-xs-12">
+					<p class="text-center">
+						<a class="btn btn-primary" onclick="lancerAnalyse();">Lancer le test</a>
+					</p>
+				</div>
+
+			</div>
+
+			<div class="row bottom-space" id="container-resultats">
+				<h2 > Résultats de l'analyse :</h2>
+				<hr>
+				<div id="resultats"></div>
+			</div>
+
+			<div class="row bottom-space"  id="container-resultatsDetailles">
+				<h2 > Résultats détaillés de l'analyse :</h2>
+				<hr>
+				<div id="resultatsDetailles"></div>
+			</div>
+
+			<footer>
+				<p class="text-center">Réaliser sur la base d'un projet l'UE INF242</p>
+			</footer>
+		</div>
+				
+		<script>
+			document.getElementById("container-resultats").style.display="none";
+			document.getElementById("container-resultatsDetailles").style.display="none";
+		</script>
+
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="js/bootstrap.min.js"></script>
+	</body>
 </html>
