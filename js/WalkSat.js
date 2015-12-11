@@ -2,15 +2,15 @@
  **                                    Projet Squaro                                 **
  **  ------------------------------------------------------------------------------  **
  **  Logique propositionnelle et logique du premier ordre appliqué au jeu du Squaro  **
- **                 		JACOB Julien et HECKMANN Victor                  		 **
+ **                		JACOB Julien et HECKMANN Victor                 		 **
  **  ------------------------------------------------------------------------------  **
- **   									- WALK SAT -      							 **
+ **  									- WALK SAT -     							 **
  **  ------------------------------------------------------------------------------  */
 
 
 var WalkSat_nbIterartionsMax = 25000;
 var WalkSatOptions = { 
-	"clauseUnitaire" 				: true, 
+	"clauseUnitaire"				: true, 
 	"eliminationClausesDoubles"		: true, 
 	"ContradictionClausesUnitaires" : true,
 	"SauvegardeAssignationsTestees"	: true
@@ -18,60 +18,64 @@ var WalkSatOptions = {
 
 var WalkSatLOG = {
 	"iterationAssignation"	: 0,
-	"iterationWalkSat" 		: 0,
-	"tempsExecution" 		: 0,
-	"messageErreur" 		: ""
+	"iterationWalkSat"		: 0,
+	"tempsExecution"		: 0,
+	"messageErreur"		: ""
 };
+
 var assignationPrecedentes = new Array();
 
+
 function WalkSat(dimacs) {
- 	WalkSatLOG["iterationAssignation"] = 0;
- 	WalkSatLOG["iterationWalkSat"] = 0;
- 	WalkSatLOG["tempsExecution"] = 0;
- 	WalkSatLOG["messageErreur"] = "";
- 	assignationPrecedentes = new Array();
+	WalkSatLOG["iterationAssignation"] 	= 0;
+	WalkSatLOG["iterationWalkSat"] 		= 0;
+	WalkSatLOG["tempsExecution"] 		= 0;
+	WalkSatLOG["messageErreur"] 		= "";
 
- 	var dateDebut = Date.now();
- 	var clauses = mise_En_Forme_Clausale(dimacs);
+	assignationPrecedentes = new Array();
 
- 	// La 1ere ligne du tableau contient l'entete 
- 	if ((clauses[0][0] != "p") || (clauses[0][1]) != "cnf") {
- 		WalkSatLOG["messageErreur"] = "Forme normale conjonctive attendu.";
- 		return "Unsolvable";
- 	}
- 	var nbVariables = clauses[0][2];
- 	var nbClauses = clauses[0][3];
+	var dateDebut = Date.now();
+	var clauses = mise_En_Forme_Clausale(dimacs);
 
- 	clauses.splice(0, 1);
+	// La 1ere ligne du tableau contient l'entete 
+	if ((clauses[0][0] != "p") || (clauses[0][1]) != "cnf") {
+		WalkSatLOG["messageErreur"] = "Forme normale conjonctive attendu.";
+		return "Unsolvable";
+	}
+
+	var nbVariables = clauses[0][2];
+	var nbClauses = clauses[0][3];
+
+	clauses.splice(0, 1);
 
 	var modeleFound = false;
- 	var assignation = creer_assignation(nbVariables, clauses);
- 	if (WalkSatLOG["SauvegardeAssignationsTestees"]) { assignationPrecedentes.push(assignation); }
+	var assignation = creer_assignation(nbVariables, clauses);
+	if (WalkSatLOG["SauvegardeAssignationsTestees"]) { assignationPrecedentes.push(assignation);}
 
- 	// Unsolvable si des clauses unitaires se contredisent
- 	if (assignation === false) { return "Unsolvable"; }
+	// Unsolvable si des clauses unitaires se contredisent
+	if (assignation === false) { return "Unsolvable";}
 
 	var estDansUnitaire = assignation["estDansUnitaire"];
 	assignation = assignation["assignation"];
 
- 	WalkSatLOG["iterationWalkSat"] = 0;
- 	for (var i = 0; (i < WalkSat_nbIterartionsMax) && !estModele(assignation, clauses); i++) {
- 		// Resortir un ensemble de clauses invalide de l'ensemble de clauses globale
- 		// Choisir au hasard une clause dans ce sous ensemble
- 		var tempClause = clauseInvalide(clauses, assignation);
- 		if (walksat_randomBool_seuil()) {
+	WalkSatLOG["iterationWalkSat"] = 0;
+	for (var i = 0; (i < WalkSat_nbIterartionsMax) && !estModele(assignation, clauses); i++) {
+		// Resortir un ensemble de clauses invalide de l'ensemble de clauses globale
+		// Choisir au hasard une clause dans ce sous ensemble
+		var tempClause = clauseInvalide(clauses, assignation);
+		if (walksat_randomBool_seuil()) {
 		// Choisir une variable de maniere deterministe
 			// On choisit la variable qui a la plus d'occurences en négatif ou en positif dans l'ens' de clauses
 			var tempVariable = variableMeilleurScore(tempClause, dimacs, assignation, estDansUnitaire);
- 		} else {
+		} else {
 		// Choisir une variable de maniere aléatoire
-			var tempVariable = tempClause[rand(0, tempClause.length-1)];	
- 		}
- 		// Inversement de la valeur de tempVariable dans assignation
- 		assignation[Math.abs(tempVariable)-1] = !assignation[Math.abs(tempVariable)-1];
- 		if (WalkSatLOG["SauvegardeAssignationsTestees"]) { assignationPrecedentes.push(assignation); }
- 		WalkSatLOG["iterationWalkSat"] = i;
- 	}
+			var tempVariable = tempClause[rand(0, tempClause.length-1)];
+		}
+		// Inversement de la valeur de tempVariable dans assignation
+		assignation[Math.abs(tempVariable)-1] = !assignation[Math.abs(tempVariable)-1];
+		if (WalkSatLOG["SauvegardeAssignationsTestees"]) { assignationPrecedentes.push(assignation);}
+		WalkSatLOG["iterationWalkSat"] = i;
+	}
 
 	WalkSatLOG["tempsExecution"] = Date.now() - dateDebut;
 
@@ -199,9 +203,9 @@ function creer_assignation(nb_var, clauses) {
 			tab_assignation[i] = walksat_randomBool();
 			
 			if (WalkSatOptions["clauseUnitaire"]) {
-				tab_unitaire[i] = false; }
+				tab_unitaire[i] = false;}
 			else {
-				tab_unitaire[i] = undefined; }
+				tab_unitaire[i] = undefined;}
 		} // Sinon cette variable était présente dans une clause unitaire
 	}
 	var x = [];
@@ -214,37 +218,38 @@ function creer_assignation(nb_var, clauses) {
 
 function mise_En_Forme_Clausale(dimacs) {
 	dimacs = dimacs.trim();
- 	var clauses = new Array();
- 	while (dimacs.indexOf("\n\n") > 0) { dimacs = dimacs.replace("\n\n", "\n"); }
- 	while (dimacs.indexOf("  ") > 0) { dimacs = dimacs.replace("  ", " "); }
- 	clauses = dimacs.split("\n");
+	var clauses = new Array();
 
- 	// AMELIORATION : Eliminatation des Clauses en Doubles
- 	if (WalkSatOptions["eliminationClausesDoubles"]) {
- 		clauses = cleanArray(clauses);
- 	}
- 	
- 	for (var x = 0; x < clauses.length; x++) {
- 		clauses[x] = clauses[x].trim(); // Permet d'enlever les espaces en trop dans le string de la clause x
- 		// clauses[x] = une ligne du fichier dimacs en string
- 		var y = 0; // indice deplacement dans temp_str
- 		var z = 0; // indice deplacement dans clauses[x]
- 		var temp_string = clauses[x];
- 		clauses[x] = new Array();
+	while (dimacs.indexOf("\n\n") > 0) 	{ dimacs = dimacs.replace("\n\n", "\n");}
+	while (dimacs.indexOf("  ") > 0) 	{ dimacs = dimacs.replace("  ", " ");}
+	clauses = dimacs.split("\n");
+
+	// AMELIORATION : Eliminatation des Clauses en Doubles
+	if (WalkSatOptions["eliminationClausesDoubles"]) {
+		clauses = cleanArray(clauses);
+	}
+	
+	for (var x = 0; x < clauses.length; x++) {
+		clauses[x] = clauses[x].trim(); // Permet d'enlever les espaces en trop dans le string de la clause x
+		// clauses[x] = une ligne du fichier dimacs en string
+		var y = 0; // indice deplacement dans temp_str
+		var z = 0; // indice deplacement dans clauses[x]
+		var temp_string = clauses[x];
+		clauses[x] = new Array();
 		
- 		while ((temp_string[y] != "/n") && (y < temp_string.length)) {
- 			while ((temp_string[y] == " ") && (y < temp_string.length)) { y++; }
- 			clauses[x][z] = "";
- 			while (((temp_string[y] != " " ) && (temp_string[y] != "\n")) && (y < temp_string.length)) {
+		while ((temp_string[y] != "/n") && (y < temp_string.length)) {
+			while ((temp_string[y] == " ") && (y < temp_string.length)) { y++;}
+			clauses[x][z] = "";
+			while (((temp_string[y] != " " ) && (temp_string[y] != "\n")) && (y < temp_string.length)) {
 				clauses[x][z] += "" + temp_string[y];
 				y++;
 			}
 			z++;
- 		}
- 		// clauses[x] = tableau des variables de la ligne du fichier dimacs
- 	}
- 	return clauses;
- } 
+		}
+		// clauses[x] = tableau des variables de la ligne du fichier dimacs
+	}
+	return clauses;
+}
 
 
 function estModele(assignation, clauses) {
@@ -255,20 +260,21 @@ function estModele(assignation, clauses) {
 	return est_Modele;
 }
 
+
 var walksat_seuil = 50;
-function walksat_randomBool_seuil()   { return parseInt(Math.random() * 100) <= walksat_seuil; }
-function walksat_randomBool()   { return parseInt(Math.random() * 100) <= 50; }
-function rand(min, max) { return parseInt(Math.random() * ((max+1) - min) + min); }
+function walksat_randomBool_seuil()	{ return parseInt(Math.random() * 100) <= walksat_seuil;}
+function walksat_randomBool()		{ return parseInt(Math.random() * 100) <= 50;}
+function rand(min, max)				{ return parseInt(Math.random() * ((max+1) - min) + min);}
 
 
 //cleanArray removes all duplicated elements
 function cleanArray(array) {
-  var i, j, len = array.length, out = [], obj = {};
-  for (i = 0; i < len; i++) {
-    obj[array[i]] = 0;
-  }
-  for (j in obj) {
-    out.push(j);
-  }
-  return out;
+	var i, j, len = array.length, out = [], obj = {};
+	for (i = 0; i < len; i++) {
+		obj[array[i]] = 0;
+	}
+	for (j in obj) {
+		out.push(j);
+	}
+	return out;
 }
