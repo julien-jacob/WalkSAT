@@ -89,65 +89,66 @@
 		</div>
 
 		<div class="container">
-			<div class="col-md-6">
+			<div class="row bottom-space">
+				<div class="col-md-6">
 
-				<h2>Paramètres du WalkSAT :</h2><hr>
+					<h2>Paramètres du WalkSAT :</h2><hr>
 
-				<textarea rows="10" id="textareaDimacs" class="form-control" ></textarea>
-				<br>
+					<textarea rows="10" id="textareaDimacs" class="form-control" ></textarea>
+					<br>
 
-				<div class="collapse" id="options">
-					<div class="form-group">
+					<div class="collapse" id="options">
+						<div class="form-group">
 
-						<div class="checkbox">
-							<label>
-								<input type="checkbox" name="WalkSatOption1" id="WalkSatOption1" checked/> Gérer les clauses valides
-							</label>
-							<br />
-							<label>
-								<input type="checkbox" name="WalkSatOption2" id="WalkSatOption2" checked/> Eliminer les clauses en double
-							</label>
-							<br />
-							<label>
-								<input type="checkbox" name="WalkSatOption3" id="WalkSatOption3" checked/> Repérer les contradictions de clauses unitaires
-							</label>
-							<br />
-							<label>
-								<input type="checkbox" name="WalkSatOption4" id="WalkSatOption4" checked/> Sauvegarde des assignations déjà testées.
-							</label>
-							<br />
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="WalkSatOption1" id="WalkSatOption1" checked/> Gérer les clauses valides
+								</label>
+								<br />
+								<label>
+									<input type="checkbox" name="WalkSatOption2" id="WalkSatOption2" checked/> Eliminer les clauses en double
+								</label>
+								<br />
+								<label>
+									<input type="checkbox" name="WalkSatOption3" id="WalkSatOption3" checked/> Repérer les contradictions de clauses unitaires
+								</label>
+								<br />
+								<label>
+									<input type="checkbox" name="WalkSatOption4" id="WalkSatOption4" checked/> Sauvegarde des assignations déjà testées.
+								</label>
+								<br />
+							</div>
 						</div>
+
+						<div class="form-group">
+							<label for="nombreIterationsMax">Nombre d'itérations maximum : </label>
+							<input type="number" value="25000" min="1" id="nombreIterationsMax" class="form-control" />
+						</div>
+
+						<div class="form-group">
+							<label for="WalkSatSeuil">Seuil pour le générateur de booléen aléatoir : </label>
+							<input type="number" value="50" min="1" max="100" id="WalkSatSeuil" class="form-control" />
+						</div>
+						<br/>
 					</div>
 
-					<div class="form-group">
-						<label for="nombreIterationsMax">Nombre d'itérations maximum : </label>
-						<input type="number" value="25000" min="1" id="nombreIterationsMax" class="form-control" />
-					</div>
+					<p class="text-right">
+						<a class="btn btn-success" onclick="lancerResolution();"> Lancer la résolution</a>
 
-					<div class="form-group">
-						<label for="WalkSatSeuil">Seuil pour le générateur de booléen aléatoir : </label>
-						<input type="number" value="50" min="1" max="100" id="WalkSatSeuil" class="form-control" />
-					</div>
-					<br/>
+						<a class="btn btn-primary" data-toggle="collapse" href="#options" aria-expanded="false" aria-controls="options"> Options</a>
+					</p>
+
+				</div> <!-- fin des parametres -->
+
+
+				<div class="col-md-6">
+					<h2>Résolution : </h2><hr>
+					<div id="divSolution"></div>
 				</div>
 
-				<p class="text-right">
-					<a class="btn btn-success" onclick="lancerResolution();"> Lancer la résolution</a>
+			</div> <!-- end col-md-row -->
+		
 
-					<a class="btn btn-primary" data-toggle="collapse" href="#options" aria-expanded="false" aria-controls="options"> Options</a>
-				</p>
-
-			</div> <!-- fin des parametres -->
-
-
-			<div class="col-md-6">
-				<h2>Résolution : </h2><hr>
-				<div id="divSolution"></div>
-			</div>
-
-		</div> <!-- .container END -->
-
-		<div class="container">
 			<footer>
 				<p class="text-center">Réaliser sur la base d'un projet l'UE INF242</p>
 			</footer>

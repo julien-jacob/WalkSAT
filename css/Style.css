@@ -21,8 +21,16 @@ table.bigTable	{ border: 1px black solid; width: 100%; text-align: center;}
 
 footer {
 	border-top: 2px #888E94 solid;
-	margin-top: 50px;
+	margin-top: 20px;
 	padding-top: 20px;
 	padding-bottom: 20px;
 }
 
+.panel-body,
+.panel-body a {
+	color: #333333;
+}
+
+.bottom-space {
+	margin-bottom: 30px;
+}
