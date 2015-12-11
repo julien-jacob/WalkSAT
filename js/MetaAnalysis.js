@@ -110,18 +110,17 @@ divResultat += "<tr><th>Nombre de 3 : </th><th>" + nombreDe3Cumules + "</th><th>
 divResultat += "<tr><th>Nombre de 4 : </th><th>" + nombreDe4Cumules + "</th><th>"+ (nombreDe4Cumules/ NombreDeTest) + "</th>";
 divResultat += "<tr><th>Nombre d'itérations : </th><th>" +  nombreIterationsCumules	 + "</th><th>"+ (nombreIterationsCumules		/ NombreDeTest) + "</th>";
 divResultat += "<tr><th>tempsExecution </th><th>" +  		tempsExecutionCumules	 + "</th><th>"+ (tempsExecutionCumules	/ NombreDeTest) + "</th>";
-divResultat += "</tr></table><hr><p>Nombre de grilles résolus : " + nombreSolvableCumules + "<br>Nombre de grilles non résolus : " + nombreInsolvableCumules + "</p>";
+
+divResultat += "</tr></table><br><p>Nombre de grilles résolus : " + nombreSolvableCumules + "<br>Nombre de grilles non résolus : " + nombreInsolvableCumules + "</p>";
 divResultat += "<p> Temps d'exécution maximum : " + tempsExecutionMaximum + " ms";
 divResultat += "<br> Temps d'exécution minimum : " +  tempsExecutionMinimum + " ms</p>";
+
+
+		document.getElementById("container-resultats").style.display = "block";
+		document.getElementById("container-resultatsDetailles").style.display = "block";
+
 		document.getElementById("resultats").innerHTML = divResultat;
+
 	}
 
 
-
-	function afficherMasquer(divName) {
-		if (document.getElementById(divName).style.display == "none") {
-			document.getElementById(divName).style.display = "block";
-		} else {
-			document.getElementById(divName).style.display="none";
-		}
-	}
