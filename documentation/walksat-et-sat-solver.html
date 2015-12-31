@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<!-- ------------------------------------------------------------------------------- -->
+<!--Projet WalkSAT -->
+<!-- ------------------------------------------------------------------------------- -->
+<!--JACOB Julien, HECKMANN Victor-->
+<!-- ------------------------------------------------------------------------------- -->
+
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<title>Walker-SAT | Documentation : Squaro et problème SAT</title>
+
+		<script type="text/javascript" src="../js/WalkSat.js"></script>
+
+		<!-- Bootstrap -->
+		<link href="../css/bootstrap.min.css" rel="stylesheet">
+
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+		<link href="../css/style.css" rel="stylesheet">
+	</head>
+	<body class="bg-black">
+
+		<nav class="navbar navbar-default navbar-static-top navbar-inverse">
+	      <div class="container-fluid">
+	      <!-- Brand and toggle get grouped for better mobile display -->
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <a class="navbar-brand" href="#">Walk<span class="text-primary">SAT</span></a>
+	        </div>
+
+	        <!-- Collect the nav links, forms, and other content for toggling -->
+	        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+	          <ul class="nav navbar-nav">
+	          <li><a href="http://walksat.cerf-de-pixel.fr/"> Solver </a></li>
+	          <li class="dropdown">
+	            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Outils de tests <span class="caret"></span></a>
+	            <ul class="dropdown-menu">
+	              <li><a href="http://walksat.cerf-de-pixel.fr/analysis.html"> Générateur de FNC </a></li>
+	              <li role="separator" class="divider"></li>
+	              <li><a href="http://walksat.cerf-de-pixel.fr/meta-analysis.html"> Tests de performances </a></li>
+	            </ul>
+	          </li>
+	          <li class="dropdown active">
+	            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation<span class="caret"></span></a>
+	            <ul class="dropdown-menu">
+	              <li><a href="http://walksat.cerf-de-pixel.fr/documentation/walksat-et-sat-solver.html"> WalkSAT et SAT-Solver </a></li>
+	              <li role="separator" class="divider"></li>
+	              <li><a href="http://walksat.cerf-de-pixel.fr/documentation/squaro-et-probleme-sat.html"> Squaro et problème SAT </a></li>
+	            </ul>
+	          </li>
+	          </ul>
+
+	          <ul class="nav navbar-nav navbar-right">
+	          <li class="dropdown">
+	            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Plus outils <span class="caret"></span></a>
+	            <ul class="dropdown-menu">
+	              <li><a href="http://htaccess-gen.cerf-de-pixel.fr/"> HTACCESS-Gen : Générateur de .htaccess et .htpassword</a></li>
+	              <li><a href="http://password-gen.cerf-de-pixel.fr/"> PASSWORD-Gen : Générateur de mots de passe aléatoires </a></li>
+	            </ul>
+	          </li>
+	          <li><a href="http://cerf-de-pixel.fr/"> Visiter Cerf-de-pixel.fr </a></li>
+	          </ul>
+
+	        </div><!-- /.navbar-collapse -->
+	      </div><!-- /.container-fluid -->
+	    </nav>
+
+		<div class="jumbotron">
+			<div class="container">
+				<div class="page-header">
+					<h1>WalkSAT <small> Documentation : Squaro et problème SAT</small></h1>
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="col-sm-3">
+				<ul class="nav nav-pills nav-stacked">
+				  <li><a href="#P1">Présentation</a></li>
+				  <li><a href="#P2">Choix de variable déterministe utilisé</a></li>
+				  <li><a href="#P3">Les améliorations apportées</a></li>
+				</ul>
+			</div>
+
+			<div class="col-sm-9">
+
+				<div class="panel panel-default" id="P1">
+					<div class="panel-heading">
+						<h2>Présentation</h2>
+					</div>
+					<div class="panel-body">
+						<p>Le WalkSat est un SAT Solveur qui, pour une assignation créée aléatoirement, prend un ensemble de clause donné en paramètre, il choisit ensuite une clause invalide de cet ensemble de clause par rapport à l’assignation courante et prend une variable soit au hasard de cette clause soit de façon déterministe pour en inverser sa valeur dans l’assignation.</p>
+						<p>Il répète cet ensemble d’instruction jusqu’à ce qu’il trouve une assignation qui est modèle à l’ensemble de clause ou jusqu’à ce que le nombre d’itération atteint un certain nombre définit au préalable.</p>
+					</div>
+				</div>
+
+				<div class="panel panel-default" id="P2">
+					<div class="panel-heading">
+						<h2>Choix de variable déterministe utilisé</h2>
+					</div>
+					<div class="panel-body">
+						<p>Pour choisir une variable d’une clause de façon déterministe, un score est calculé pour chaque variable de la clause. Le score d’un variable se définit de la façon suivante :</p>
+						<ul>
+							<li>Si la valeur de cette variable est égale à vrai dans l’assignation courant alors son score sera le nombre de clause où cette variable apparaît négativement moins le nombre de clause où elle apparaît positivement.</li>
+							<li>Si sa valeur est égale à fauxdans l’assignation courant alors son score sera le nombre de clause où cette variable apparaît positivement moins le nombre de clause où elle apparaît négativement.</li>
+						</ul>
+					</div>
+				</div> 
+
+				<div class="panel panel-default" id="P3">
+					<div class="panel-heading">
+						<h2>Les améliorations apportées</h2>
+					</div>
+					<div class="panel-body">
+						<p>Après avoir développé le WalkSAT et implémenté le choix de variable déterministe détaillé ci-dessus, nous lui avons ajouté quelques améliorations.</p>
+						<br />
+
+						<h3>Gestion des clauses unitaires</h3>
+						<p>La gestion des clauses unitaires intervient plusieurs fois dans les algorithmes utilisés dans le développement du WalkerTexSATRanger.</p>
+
+						<p>Cette amélioration permet, lors de la création aléatoire de l’assignation, de déterminer la valeur d’une variable si elle apparait dans une clause unitaire.</p>
+
+						<p>Elle empêche de prendre une clause unitaire lors du tirage d’une clause aléatoire.</p>
+
+						<p>Elle permet aussi de ne pas tirer une variable contenu dans une clause unitaire lors du choix déterministe d’une variable.</p>
+						<br />
+
+						<h3>Contradiction de clauses unitaires</h3>
+
+						<p>La détection de contradiction entre deux clauses unitaires permet de savoir de façon très rapide si l’ensemble de clause est satisfaisable ou non lors de la création de l’assignation.</p>
+
+						<p>Si la variable d’une clause unitaire ‘c’ possède déjà une valeur dans l’assignation et que cette valeur est différente de celle qu’elle devrait avoir pour rendre la clause ‘c’ valide, alors l’ensemble est insatisfaisable.</p>
+						<br />
+
+						<h3>Sauvegarde des assignations</h3>
+
+						<p>La sauvegarde des assignations déjà testé permet, lors du choix déterministe d’une variable, de renvoyer directement une variable si l’inversement de sa valeur dans l’assignation n’as pas encore été essayé.</p>
+
+						<p>Elimination des clauses en doubles L’élimination des clauses en doubles permet de réduire le nombre d’accès au tableau contenant les clauses, ce qui a pour effet de réduire légèrement le temps d’exécution de certaines fonctions.</p>
+					</div>
+				</div> 
+
+			</div>
+
+		</div>
+
+		<div class="container">
+			<footer>
+				<p class="text-center">Réaliser sur la base d'un projet l'UE INF242</p>
+			</footer>
+		</div>
+
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="../js/bootstrap.min.js"></script>
+	</body>
+</html>

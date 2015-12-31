@@ -103,13 +103,13 @@
 
 divResultat += "<tr><th>Nombre de ronds des solutions : </th><th>"+ 	nombresDeRondsSolutionC	 + "</th><th>"+ (nombresDeRondsSolutionC / NombreDeTest) + "</th>";
 divResultat += "<tr><th>Somme des valeurs : </th><th>" + sommeDesValeursCumules	 + "</th><th>"+ (sommeDesValeursCumules	/ NombreDeTest) + "</th>";
-divResultat += "<tr><th>Nombre de 0 : </th><th>" + nombreDe0Cumules + "</th><th>"+ (nombreDe0Cumules/ NombreDeTest) + "</th>";
-divResultat += "<tr><th>Nombre de 1 : </th><th>" + nombreDe1Cumules + "</th><th>"+ (nombreDe1Cumules/ NombreDeTest) + "</th>";
-divResultat += "<tr><th>Nombre de 2 : </th><th>" + nombreDe2Cumules + "</th><th>"+ (nombreDe2Cumules/ NombreDeTest) + "</th>";
-divResultat += "<tr><th>Nombre de 3 : </th><th>" + nombreDe3Cumules + "</th><th>"+ (nombreDe3Cumules/ NombreDeTest) + "</th>";
-divResultat += "<tr><th>Nombre de 4 : </th><th>" + nombreDe4Cumules + "</th><th>"+ (nombreDe4Cumules/ NombreDeTest) + "</th>";
-divResultat += "<tr><th>Nombre d'itérations : </th><th>" +  nombreIterationsCumules	 + "</th><th>"+ (nombreIterationsCumules		/ NombreDeTest) + "</th>";
-divResultat += "<tr><th>tempsExecution </th><th>" +  		tempsExecutionCumules	 + "</th><th>"+ (tempsExecutionCumules	/ NombreDeTest) + "</th>";
+divResultat += "<tr><th>Nombre de 0 : </th><th>" + nombreDe0Cumules + "</th><th> "+ (nombreDe0Cumules/ NombreDeTest) + "</th>";
+divResultat += "<tr><th>Nombre de 1 : </th><th>" + nombreDe1Cumules + "</th><th> "+ (nombreDe1Cumules/ NombreDeTest) + "</th>";
+divResultat += "<tr><th>Nombre de 2 : </th><th>" + nombreDe2Cumules + "</th><th> "+ (nombreDe2Cumules/ NombreDeTest) + "</th>";
+divResultat += "<tr><th>Nombre de 3 : </th><th>" + nombreDe3Cumules + "</th><th> "+ (nombreDe3Cumules/ NombreDeTest) + "</th>";
+divResultat += "<tr><th>Nombre de 4 : </th><th>" + nombreDe4Cumules + "</th><th> "+ (nombreDe4Cumules/ NombreDeTest) + "</th>";
+divResultat += "<tr><th>Nombre d'itérations : </th><th>" +  nombreIterationsCumules	 + "</th><th> "+ (nombreIterationsCumules		/ NombreDeTest) + "</th>";
+divResultat += "<tr><th>tempsExecution </th><th>" +  		tempsExecutionCumules	 + "</th><th> "+ (tempsExecutionCumules	/ NombreDeTest) + "</th>";
 
 divResultat += "</tr></table><br><p>Nombre de grilles résolus : " + nombreSolvableCumules + "<br>Nombre de grilles non résolus : " + nombreInsolvableCumules + "</p>";
 divResultat += "<p> Temps d'exécution maximum : " + tempsExecutionMaximum + " ms";
