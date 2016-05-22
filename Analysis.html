@@ -5,13 +5,14 @@
 <!--JACOB Julien, HECKMANN Victor-->
 <!-- ------------------------------------------------------------------------------- -->
 
-<html lang="fr">
+<html lang="fr-FR">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Walker-SAT | Générez des FNC au format DIMACS</title>
+    <title>Walker-SAT | Générez des FNC aléatoires format DIMACS</title>
+    <meta name="description" content="Utilisez des grilles du jeu de Squaro pour générer des FNC aléatoires au format DIMAC">
 
     <script type="text/javascript" src="js/WalkSat.js"></script>
     <script type="text/javascript" src="js/Squaro.js"></script>
@@ -114,7 +115,7 @@
             </tr>
           </table>
 
-          <input type="checkbox" name="genererGrilleSolvable" id="genererGrilleSolvable" checked/> 
+          <input type="checkbox" name="genererGrilleSolvable" id="genererGrilleSolvable" checked/>
           <label for="genererGrilleSolvable">Générer une grille solvable.</label>
           <br><br>
           <a class="btn btn-primary" onclick="actualiserSquaro();">Nouvelle grille</a>
@@ -196,7 +197,7 @@
             <div class="form-group">
               <label for="nombreIterationsMax">Nombre d'itérations maximum : </label>
               <input type="number" value="25000" min="1" id="nombreIterationsMax" class="form-control" />
-            
+
               <label for="WalkSatSeuil">Seuil pour le générateur de booléen aléatoir : </label>
               <input type="number" value="50" min="1" max="100" id="WalkSatSeuil" class="form-control" />
             </div>
@@ -228,7 +229,7 @@
         Julien JACOB & Vicktor HECKMAN</p>
       </footer>
     </div>
-        
+
     <script tpye="text/javascript">
       actualiserSquaro();
     </script>
@@ -248,6 +249,6 @@
       ga('send', 'pageview');
 
     </script>
-    
+
   </body>
 </html>
